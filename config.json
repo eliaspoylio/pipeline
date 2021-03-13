@@ -1,5 +1,4 @@
 [
-    "Get-ChildItem",
-    "Resolve-DnsName example.com",
-    "node examples/index.js"
+    "ls -l",
+    "dig example.com"
 ]

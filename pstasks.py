@@ -9,7 +9,8 @@ class Tasklist:
 
     @classmethod
     def run(self, cmd):
-        completed = subprocess.run(["powershell", "-Command", cmd], capture_output=True)
+        #completed = subprocess.run(["powershell", "-Command", cmd], capture_output=True)
+        completed = subprocess.run([cmd], shell=True)
         return completed
 
     @classmethod
@@ -40,7 +41,8 @@ def main():
         if task.returncode != 0:
             print("An error occured: %s", task.stderr)
         else:
-            print(task.stdout.decode("utf-8"))
+            #print(task.stdout.decode("utf-8"))
+            print(task.stdout)
             continue
 
 
