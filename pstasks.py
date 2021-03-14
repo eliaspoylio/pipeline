@@ -1,17 +1,11 @@
 import time
-import subprocess
 import json
 import sys
+import platform 
 
 class Tasklist:
     config_path = './config.json'
     config = []
-
-    @classmethod
-    def run(self, cmd):
-        #completed = subprocess.run(["powershell", "-Command", cmd], capture_output=True)
-        completed = subprocess.run([cmd], shell=True)
-        return completed
 
     @classmethod
     def getConfig(self):
@@ -31,35 +25,37 @@ class Tasklist:
         return self.config
 
 def main():
+
     start = time.time()
+    print("------------------------------------------------")
+    plt = platform.system()
+    if plt == "Windows":
+        print("Running on " + plt)
+        import modules.windows as nativetools
+    elif plt == "Linux":
+        print("Running on " + plt)
+        import modules.linux as nativetools
+    elif plt == "Darwin":
+        print("Running on " + plt)
+        import modules.windows as nativetools
+    else:
+        print("Unidentified system" + plt)
     print("------------------------------------------------")
     
     tasklist=Tasklist.getConfig()
 
     for item in tasklist:
-        task = Tasklist.run(item)
+        task = nativetools.run(item)
         if task.returncode != 0:
             print("An error occured: %s", task.stderr)
         else:
-            #print(task.stdout.decode("utf-8"))
-            print(task.stdout)
+            nativetools.output(task)
             continue
 
 
     print("------------------------------------------------")
     end = time.time()
     print("Finished tasks after:",end - start,"seconds")
-
-    import platform 
-    plt = platform.system()
-    if plt == "Windows":
-        print("Your system is " + plt)
-    elif plt == "Linux":
-        print("Your system is " + plt)
-    elif plt == "Darwin":
-        print("Your system is " + plt)
-    else:
-        print("Unidentified system" + plt)
 
 if __name__ == '__main__':
      main()
