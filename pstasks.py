@@ -50,5 +50,16 @@ def main():
     end = time.time()
     print("Finished tasks after:",end - start,"seconds")
 
+    import platform 
+    plt = platform.system()
+    if plt == "Windows":
+        print("Your system is " + plt)
+    elif plt == "Linux":
+        print("Your system is " + plt)
+    elif plt == "Darwin":
+        print("Your system is " + plt)
+    else:
+        print("Unidentified system" + plt)
+
 if __name__ == '__main__':
      main()
