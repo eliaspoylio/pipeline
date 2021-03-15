@@ -8,6 +8,11 @@ Motivation for pstasks.py was to have something like this to run from PowerShell
 
 ## Dependencies
 
-- Python
+- Python 3
 
-Tested with: Python 3.9.1
+Tested with: 
+
+Python 3.9.1 on Windows
+
+Python 3.6.9 on Linux
+
